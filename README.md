@@ -147,19 +147,13 @@ La configuración principal se encuentra en `backend_logistica/settings.py`. Alg
 [Especificar la licencia del proyecto]
 
 ## 👤 Autor
-AnMunozG
- -GitHub: @AnMunozG
-yasser-duoc
- -GitHub: @yasser-duoc
-MartinIgnaci0
- -GitHub: MartinIgnaci0
+- AnMunozG
+ - GitHub: @AnMunozG
+- yasser-duoc
+ - GitHub: @yasser-duoc
+- MartinIgnaci0
+ - GitHub: MartinIgnaci0
 
 ## 🤝 Contribuciones
 
-Las contribuciones son bienvenidas. Por favor:
-
-1. Haga un fork del proyecto
-2. Cree una rama para su feature (`git checkout -b feature/AmazingFeature`)
-3. Commit sus cambios (`git commit -m 'Add some AmazingFeature'`)
-4. Push a la rama (`git push origin feature/AmazingFeature`)
-5. Abra un Pull Request
+Las contribuciones son bienvenidas:
