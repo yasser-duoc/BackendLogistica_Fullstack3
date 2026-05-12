@@ -7,8 +7,8 @@ from .serializers import ProductoSerializer, CentroAcopioSerializer, InventarioS
 
 class ProductoViewSet(viewsets.ModelViewSet):
     queryset = Producto.objects.all()
-    serializerClase = ProductoSerializer
-    permisosClases = [permissions.IsAdminUser]
+    serializer_class = ProductoSerializer
+    permission_classes = [permissions.IsAdminUser]
 
 class CentroAcopioViewSet(viewsets.ModelViewSet):
     queryset = CentroAcopio.objects.all()

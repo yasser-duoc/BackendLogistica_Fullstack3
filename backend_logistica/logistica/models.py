@@ -3,7 +3,6 @@ from django.db import models
 class CentroAcopio(models.Model):
     nombre = models.CharField(max_length=100)
     direccion = models.TextField()
-    capacidadMaxima = models.IntegerField()
     capacidadTotal = models.IntegerField()
     capacidadUsada = models.IntegerField()
     latitud = models.FloatField(null=True, blank=True)
