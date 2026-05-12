@@ -152,7 +152,7 @@ La configuración principal se encuentra en `backend_logistica/settings.py`. Alg
 - yasser-duoc
     - GitHub: @yasser-duoc
 - MartinIgnaci0
-    - GitHub: MartinIgnaci0
+    - GitHub: @MartinIgnaci0
 
 ## 🤝 Contribuciones
 
