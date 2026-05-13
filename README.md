@@ -1,159 +1,164 @@
 # Backend Logística - Fullstack 3
 
-Sistema backend para gestión de logística desarrollado con Django REST Framework.
+API REST para gestión logística desarrollada con Django y Django REST Framework. El proyecto modela centros de acopio, productos e inventario, con documentación automática de la API y autenticación basada en JWT.
 
-## 📋 Descripción
+## Descripción
 
-Este proyecto es un backend de logística que proporciona una API REST completa para la gestión de operaciones logísticas. Utiliza Django como framework principal y Django REST Framework para la creación de APIs.
+Este backend centraliza la administración de una solución logística orientada a ayuda humanitaria. Permite crear y consultar centros de acopio, administrar productos y registrar inventario entre ambos modelos.
 
-## 🛠️ Tecnologías Utilizadas
+## Tecnologías
 
-- **Python 3.x**
-- **Django** - Framework web
-- **Django REST Framework** - Para la creación de APIs REST
-- **SQLite** - Base de datos (desarrollo)
-- **pip** - Gestor de dependencias de Python
+- Python 3
+- Django
+- Django REST Framework
+- Django REST Framework SimpleJWT
+- drf-spectacular para OpenAPI y Swagger
+- django-cors-headers
+- MySQL
 
-## 📁 Estructura del Proyecto
+## Estructura
 
+```text
+BackendLogistica_Fullstack3/
+├── manage.py
+├── requirements.txt
+├── db.sqlite3
+├── confing/
+│   ├── settings.py
+│   ├── urls.py
+│   ├── asgi.py
+│   └── wsgi.py
+└── logistica/
+     ├── models.py
+     ├── serializers.py
+     ├── views.py
+     ├── urls.py
+     ├── admin.py
+     ├── tests.py
+     └── migrations/
 ```
-backend_logistica/
-├── db.sqlite3                 # Base de datos SQLite
-├── manage.py                  # Utilidad de línea de comandos de Django
-├── backend_logistica/         # Configuración principal del proyecto
-│   ├── __init__.py
-│   ├── asgi.py               # ASGI config
-│   ├── settings.py           # Configuración del proyecto
-│   ├── urls.py               # URLs principales
-│   └── wsgi.py               # WSGI config
-└── logistica/                # Aplicación principal
-    ├── __init__.py
-    ├── admin.py              # Configuración del admin
-    ├── apps.py               # Configuración de la app
-    ├── models.py             # Modelos de datos
-    ├── serializers.py        # Serializadores DRF
-    ├── tests.py              # Pruebas unitarias
-    ├── urls.py               # URLs de la app
-    ├── views.py              # Vistas de la API
-    └── migrations/           # Migraciones de base de datos
-```
 
-## 🚀 Instalación
+## Modelos principales
 
-### Requisitos Previos
+- `CentroAcopio`: nombre, dirección, capacidad total, capacidad usada y coordenadas.
+- `Producto`: nombre, categoría, descripción, unidad de medida, fecha de creación y estado activo.
+- `Inventario`: relación entre producto y centro de acopio con cantidad y fecha de actualización.
 
-- Python 3.x instalado
-- pip (gestor de paquetes de Python)
+## Requisitos
 
-### Pasos de Instalación
+- Python 3.10 o superior
+- MySQL en ejecución
+- pip y un entorno virtual
 
-1. **Clonar el repositorio**
-   ```bash
-   git clone <URL_DEL_REPOSITORIO>
-   cd BackendLogistica_Fullstack3
-   ```
+## Instalación
 
-2. **Ejecutar un entorno virtual**
-   ```bash
-   python -m venv venv
-   # En Windows:
-   venv\Scripts\activate
-   # En macOS/Linux:
-   source venv/bin/activate
-   ```
+1. Clonar el repositorio.
+    ```bash
+    git clone <URL_DEL_REPOSITORIO>
+    cd BackendLogistica_Fullstack3
+    ```
 
-3. **Instalar las dependencias**
-   ```bash
-   pip install -r requirements.txt
-   ```
+2. Crear y activar un entorno virtual.
+    ```bash
+    python -m venv venv
+    # Windows
+    venv\Scripts\activate
+    # Linux / macOS
+    source venv/bin/activate
+    ```
 
-4. **Ejecutar migraciones**
-   ```bash
-   python manage.py migrate
-   ```
+3. Instalar dependencias.
+    ```bash
+    pip install -r requirements.txt
+    ```
 
-5. **Crear un superusuario** (opcional, para acceder al admin)
-   ```bash
-   python manage.py createsuperuser
-   ```
+4. Revisar la configuración de base de datos en `confing/settings.py`.
+    - Por defecto apunta a MySQL con la base `backend_logistica_db`.
+    - Ajusta usuario, contraseña, host y puerto según tu entorno.
 
-## 🏃 Ejecutar el Proyecto
+5. Ejecutar migraciones.
+    ```bash
+    python manage.py migrate
+    ```
 
-Para iniciar el servidor de desarrollo:
+6. Crear un superusuario si vas a usar el admin.
+    ```bash
+    python manage.py createsuperuser
+    ```
+
+## Ejecución
+
+Inicia el servidor de desarrollo con:
 
 ```bash
-python manage.py runserver
+python manage.py runserver 8001
 ```
 
-El servidor estará disponible en: `http://127.0.0.1:8000/`
+La aplicación quedará disponible en `http://127.0.0.1:8001/`.
 
-### Acceso al Admin de Django
+## Rutas disponibles
 
-Si creó un superusuario, puede acceder al admin en:
+### Administración y documentación
+
+- `/admin/` - Panel de administración de Django.
+- `/api/schema/` - Esquema OpenAPI.
+- `/api/docs/` - Swagger UI.
+
+### API REST
+
+Las rutas principales están expuestas bajo `/api/`:
+
+- `/api/productos/` - CRUD de productos.
+- `/api/centros/` - CRUD de centros de acopio.
+- `/api/inventario/` - CRUD de inventario.
+
+## Autenticación y permisos
+
+- `ProductoViewSet` requiere usuario administrador.
+- `CentroAcopioViewSet` e `InventarioViewSet` requieren usuario autenticado.
+- La autenticación configurada en el proyecto usa JWT.
+
+## API y serialización
+
+- La documentación automática se genera con drf-spectacular.
+- `Inventario` expone campos calculados como `productoNombre` y `centroNombre` para facilitar el consumo desde frontend.
+
+## Pruebas
+
+Ejecuta la suite de pruebas con:
+
+```bash
+python manage.py test
 ```
-http://127.0.0.1:8000/admin/
-```
 
-## 📚 API Endpoints
+## Migraciones
 
-Los endpoints principales se encuentran en la aplicación `logistica`. Consulte `logistica/urls.py` para ver las rutas disponibles.
-
-### Ejemplo de URLs
-
-```python
-# En logistica/urls.py
-urlpatterns = [
-    # Agregar endpoints aquí
-]
-```
-
-## 🗄️ Base de Datos
-
-Este proyecto utiliza SQLite por defecto para desarrollo. Para producción.
-
-### Crear una nueva migración
-
-Después de modificar modelos en `logistica/models.py`:
+Si modificas modelos en `logistica/models.py`, crea y aplica migraciones:
 
 ```bash
 python manage.py makemigrations
 python manage.py migrate
 ```
 
-## 🧪 Pruebas
+## Configuración importante
 
-Ejecute las pruebas unitarias con:
+La configuración principal está en `confing/settings.py`.
 
-```bash
-python manage.py test
-```
+- `DEBUG` controla el modo de depuración.
+- `DATABASES` define la conexión a MySQL.
+- `REST_FRAMEWORK` activa JWT como autenticación por defecto.
+- `SPECTACULAR_SETTINGS` define el título y la descripción de la documentación.
 
-## ⚙️ Configuración
+## Notas
 
-La configuración principal se encuentra en `backend_logistica/settings.py`. Algunas variables importantes:
+- Mantén las credenciales fuera del control de versiones cuando pases a entornos reales.
+- Si vas a consumir la API desde un frontend, revisa también la configuración de CORS.
 
-- `DEBUG` - Modo de depuración
-- `ALLOWED_HOSTS` - Hosts permitidos
-- `INSTALLED_APPS` - Aplicaciones instaladas
-- `DATABASES` - Configuración de base de datos
+## Autoría
 
-## 📝 Notas de Desarrollo
-
-- Asegúrarse de crear un entorno virtual antes de instalar dependencias
-- No incluir archivos sensibles (contraseñas, claves API) en el control de versiones
-
-## 📄 Licencia
-
-[Especificar la licencia del proyecto]
-
-## 👤 Autor
 - AnMunozG
     - GitHub: @AnMunozG
 - yasser-duoc
     - GitHub: @yasser-duoc
 - MartinIgnaci0
     - GitHub: @MartinIgnaci0
-
-## 🤝 Contribuciones
-
-Las contribuciones son bienvenidas:
