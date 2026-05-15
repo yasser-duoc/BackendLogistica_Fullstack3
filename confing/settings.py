@@ -81,7 +81,7 @@ WSGI_APPLICATION = 'confing.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'backend_logistica_db',
+        'NAME': 'backend_logistica',
         'USER': 'root',
         'PASSWORD': '',#admin123
         'HOST': '127.0.0.1',

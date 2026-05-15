@@ -20,7 +20,7 @@ class LogisticaTests(TestCase):
         # Crear Centro de Acopio 
         self.centro = CentroAcopio.objects.create(
             nombre="Centro Test Santiago",
-            direccion="Calle Falsa 123",
+            region="Metropolitana",
             capacidadTotal=5000,
             capacidadUsada=0
         )
